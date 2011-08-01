@@ -1,2 +1,3 @@
-== CoreGame for Android ==
+= CoreGame for Android =
+== The plot ==
 Rotate your phone, touch the screen to protect the core and to gain health and bonuses. Now the game is in development.
