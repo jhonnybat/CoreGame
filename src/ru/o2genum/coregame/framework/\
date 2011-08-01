@@ -1,0 +1,10 @@
+package ru.o2genum.coregame.framework;
+
+public interface Graphics
+{
+	public int getWidth();
+
+	public int getHeight();
+
+	public Canvas getCanvas(); // This canvas will draw on the framebuffer
+}
