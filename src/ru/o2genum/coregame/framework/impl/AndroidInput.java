@@ -10,13 +10,13 @@ import ru.o2genum.coregame.framework.Input;
 
 public class AndroidInput implements Input
 {
-    // OrientationHandler orientHandler;
+    OrientationHandler orientHandler;
     KeyboardHandler keyHandler;
     TouchHandler touchHandler;
 
     public AndroidInput(Context context, View view)
     {
-    	// orientHandler = new OrientationHandler(context);
+    	orientHandler = new AndroidOrientationHandler(context);
     	keyHandler = new KeyboardHandler(view);
     	if(Integer.parseInt(VERSION.SDK) < 5)
     		touchHandler = new SingleTouchHandler(view);
@@ -51,7 +51,7 @@ public class AndroidInput implements Input
     @Override
     public float getAzimuth()
     {
-    	return 0.0F; // orientHandler.getAzimuth();
+		return orientHandler.getAzimuth();
     }
 
     @Override

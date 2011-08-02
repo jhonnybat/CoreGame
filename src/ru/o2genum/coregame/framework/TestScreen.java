@@ -39,6 +39,9 @@ public class TestScreen extends Screen {
 			game.getInput().getTouchY(),
 			40.0F, p);
 	game.getVibration().vibrate(100);
+	String num = " " + game.getInput().getAzimuth();
+	c.drawText(num,
+			100.0F, 100.0F, p);
 	}
     }
 
