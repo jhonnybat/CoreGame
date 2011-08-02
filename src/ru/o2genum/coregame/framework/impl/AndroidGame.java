@@ -44,6 +44,7 @@ public abstract class AndroidGame extends Activity implements Game
 		fileIO = new AndroidFileIO(getAssets());
 		audio = new AndroidAudio(this);
 		input = new AndroidInput(this, renderView);
+		vibration = new AndroidVibration(this);
 		screen = getStartScreen();
 		setContentView(renderView);
 

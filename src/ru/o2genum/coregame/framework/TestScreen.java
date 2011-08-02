@@ -38,6 +38,7 @@ public class TestScreen extends Screen {
 	c.drawCircle(game.getInput().getTouchX(),
 			game.getInput().getTouchY(),
 			40.0F, p);
+	game.getVibration().vibrate(100);
 	}
     }
 
