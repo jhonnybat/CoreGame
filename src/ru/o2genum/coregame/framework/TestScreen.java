@@ -33,7 +33,7 @@ public class TestScreen extends Screen {
     public void present(float deltaTime) {
     Canvas c = game.getGraphics().getCanvas();    
 	c.drawRGB(0, 100, 0);
-	if(game.getInput().isTouched())
+	if(game.getInput().isTouchDown())
 	{
 	c.drawCircle(game.getInput().getTouchX(),
 			game.getInput().getTouchY(),
