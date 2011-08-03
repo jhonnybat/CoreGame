@@ -6,9 +6,10 @@ public class Dot
 		Shield, // Protects the core 
 		Bomb} // Destroys all points within defined radius
 
-	Type type;
-	VectorF speed;
-	float energy;
-	VectorF coordinates;
-	float radius;
+	public Type type;
+	public VectorF speed;
+	public float energy; // Max 1.0F
+	public VectorF coords;
+	public static float maxRadius;
+	public static final float GAP_ANGLE = 90.0F;
 }

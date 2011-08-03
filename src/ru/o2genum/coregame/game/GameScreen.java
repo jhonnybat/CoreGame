@@ -11,52 +11,33 @@ import android.util.Log;
 
 public class TestScreen extends Screen {
     long startTime = System.nanoTime();
-    int frames;
-	Paint p = new Paint();
+	World world;
         
     public TestScreen(Game game) {
-        super(game);    
-		p.setColor(0xffffffff);
-       
-        try {
-            Log.d("MrNom", "" );
-        } catch(Exception ex) {
-            ex.printStackTrace();
-        }
+        super(game);
+		world = new World(game.getGraphics());	
     }
     
     @Override
     public void update(float deltaTime) {
+		world.update(deltaTime);
     }
 
     @Override
     public void present(float deltaTime) {
     Canvas c = game.getGraphics().getCanvas();    
-	c.drawRGB(0, 100, 0);
-	if(game.getInput().isTouchDown())
-	{
-	c.drawCircle(game.getInput().getTouchX(),
-			game.getInput().getTouchY(),
-			40.0F, p);
-	game.getVibration().vibrate(100);
-	String num = " " + game.getInput().getAzimuth();
-	c.drawText(num,
-			100.0F, 100.0F, p);
-	}
     }
 
     @Override
     public void pause() {
-        Log.d("MrNom", "pause");                
+		world.pause();
     }
 
     @Override
     public void resume() {
-        Log.d("MrNom", "resume");   
     }
 
     @Override
     public void dispose() {
-        Log.d("MrNom", "dispose");
     }            
 }
