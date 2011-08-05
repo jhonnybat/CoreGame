@@ -4,6 +4,12 @@ import android.graphics.PointF;
 
 public class VectorF extends PointF
 {
+
+	public VectorF(float x, float y)
+	{
+		super(x, y);
+	}
+
 	public VectorF add(VectorF vector)
 	{
 		return new VectorF(this.x + vector.x, this.y + vector.y);

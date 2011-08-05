@@ -11,5 +11,4 @@ public class Dot
 	public float energy; // Max 1.0F
 	public VectorF coords;
 	public static float maxRadius;
-	public static final float GAP_ANGLE = 90.0F;
 }

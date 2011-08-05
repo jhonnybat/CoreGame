@@ -6,8 +6,9 @@ public class Core
 	public float shieldEnergy; // Max 1.0F
 	public float angle;
 	public VectorF coords;
-	public float maxRaduis;
+	public float maxRadius;
 	public float shieldRadius;
+	public static final float GAP_ANGLE = 90.0F;
 	// Core's and core shield's sizes are managed by World
 }
 
