@@ -17,6 +17,7 @@ public class World
 	public List<Dot> dots = new LinkedList<Dot>();
 	public Core core = new Core();
 	public float offScreenRadius;
+	private final int DOTS_COUNT = 10;
 	private float shieldCoeff = 20.0F;
 	private float energyCoeff = 6.0F;
 	private float deltaAngle = 0.0F;
@@ -52,6 +53,20 @@ public class World
 		core.health = 1.0F;
 		core.shieldEnergy = 0.0F;
 		state = GameState.Ready;
+		generateStartDots(DOTS_COUNT);
+	}
+	// Add randomness
+	private void generateStartDots(int count)
+	{
+		float seconds = 10F;
+		for(int i = 0; i < count; i++)
+		{
+			generateNewDot();
+			float interval = random.nextFloat() * 4F;
+			seconds -= interval;
+			if(seconds >= 0.0F)
+			moveDots(interval);
+		}
 	}
 
 	public void update(float deltaTime)
@@ -123,7 +138,7 @@ public class World
 	{
 		doInput();
 
-		generateNewDots(8);
+		generateNewDots(DOTS_COUNT);
 
 		handleCollisions();
 		moveDots(deltaTime);
@@ -144,6 +159,7 @@ public class World
 
 	private void generateNewDots(int neededCount)
 	{
+		float rand = random.nextFloat();
 		if(neededCount > dots.size())
 			generateNewDot();
 	}
