@@ -26,6 +26,9 @@ public class GameScreen extends Screen {
 		rect.left = world.core.coords.x - world.core.shieldRadius;
 		rect.bottom = world.core.coords.y + world.core.shieldRadius;
 		rect.right = world.core.coords.x + world.core.shieldRadius;
+
+		paint.setAntiAlias(true);
+		paint.setStrokeWidth(0.0F);
     }
     
     @Override
@@ -37,16 +40,15 @@ public class GameScreen extends Screen {
     public void present(float deltaTime) {
     Canvas c = game.getGraphics().getCanvas();    
 	c.drawARGB(255, 0, 0, 0);
-	paint.setAntiAlias(true);
 	paint.setStyle(Paint.Style.FILL_AND_STROKE);
 	if(world.core.shieldEnergy > 0.0F)
 	{
 		paint.setColor(0xff003cca);
 		paint.setAlpha((int) (80.0F +
 				   	(255.0F - 80.0F) * world.core.shieldEnergy));
-	c.drawCircle(world.core.coords.x, world.core.coords.y,
+		c.drawCircle(world.core.coords.x, world.core.coords.y,
 			world.core.shieldRadius, paint);
-	paint.setAlpha(255);
+		paint.setAlpha(255);
 	}
 	paint.setColor(0xff19dbe2);
 	c.drawCircle(world.core.coords.x, world.core.coords.y,
@@ -54,8 +56,10 @@ public class GameScreen extends Screen {
 			paint);
 	paint.setStyle(Paint.Style.STROKE);
 	paint.setColor(0xffffffff);
-	c.drawArc(rect, world.core.angle,
+	paint.setStrokeWidth(Core.SHIELD_WIDTH);
+	c.drawArc(rect, (360.0F - world.core.angle),
 			(360.0F - world.core.GAP_ANGLE), false, paint);
+	paint.setStrokeWidth(0.0F);
 	paint.setStyle(Paint.Style.FILL_AND_STROKE);
 	Iterator<Dot> iterator = world.dots.iterator();
 	while(iterator.hasNext())
@@ -78,17 +82,22 @@ public class GameScreen extends Screen {
 	if(world.state == World.GameState.Running)
 		; // points, etc
 	else if(world.state == World.GameState.Ready)
-		drawMessage("Ready? Touch the screen!", c);
+		drawMessage("Ready?\nTouch the screen!", c);
 	else if(world.state == World.GameState.Paused)
-		drawMessage("Game is paused. Touch the screen to resume.", c);
+		drawMessage("Game is paused.\nTouch the screen\nto resume.", c);
 	else if(world.state == World.GameState.GameOver)
-		drawMessage("Game over! Touch the screen to restart.", c);
+		drawMessage("Game over!\nTouch the screen\nto restart.", c);
 	}
 
 	private void drawMessage(String message, Canvas c)
 	{
 		paint.setColor(0xffffffff);
-		c.drawText(message, 0, 100, paint);
+		float y = paint.getTextSize();
+		for(String line: message.split("\n"))
+		{
+		c.drawText(line, 0, y, paint);
+		y += paint.getTextSize();
+		}
 	}
 
     @Override
