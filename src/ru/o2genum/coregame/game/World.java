@@ -8,8 +8,6 @@ import ru.o2genum.coregame.framework.Input.KeyEvent;
 
 import android.util.*;
 
-// Not fully implemented!
-
 public class World
 {
 	Random random = new Random();
@@ -17,10 +15,12 @@ public class World
 	public List<Dot> dots = new LinkedList<Dot>();
 	public Core core = new Core();
 	public float offScreenRadius;
-	private final int DOTS_COUNT = 100;
-	private float shieldCoeff = 20.0F;
-	private float energyCoeff = 6.0F;
+	private final int DOTS_COUNT = 10;
+	private final float SHIELD_FACTOR = 20.0F;
+	private final float ENERGY_FACTOR = 6.0F;
 	private float deltaAngle = 0.0F;
+
+	private float time = 0.0F; // in seconds
 
 	public enum GameState {Ready, Running, Paused, GameOver}
 
@@ -86,7 +86,6 @@ public class World
 			updateGameOver(deltaTime);
 	}
 
-	// Don't read this method's code! It's bad for your brain!
 	private void doInput()
 	{
 	    float orientAngle = game.getInput().getAzimuth();
@@ -144,6 +143,8 @@ public class World
 
 	private void updateRunning(float deltaTime)
 	{
+		countTime(deltaTime);
+
 		doInput();
 
 		generateNewDots(DOTS_COUNT);
@@ -159,7 +160,7 @@ public class World
 	{
 		if(core.shieldEnergy > 0.0F)
 		{
-			core.shieldEnergy -= deltaTime / shieldCoeff;
+			core.shieldEnergy -= deltaTime / SHIELD_FACTOR;
 			if(core.shieldEnergy < 0.0F)
 			core.shieldEnergy = 0.0F;
 		}
@@ -199,9 +200,7 @@ public class World
 			dot.energy = 0.3F;
 		float typeRand = random.nextFloat();
 		Dot.Type type;
-		if(typeRand >= 0.95)
-			type = Dot.Type.Bomb;
-		else if (typeRand >= 0.9)
+		if (typeRand >= 0.9)
 			type = Dot.Type.Shield;
 		else if (typeRand >= 0.8)
 			type = Dot.Type.Health;
@@ -209,6 +208,23 @@ public class World
 			type = Dot.Type.Enemy;
 		dot.type = type;
 		dots.add(dot);
+	}
+
+	private void countTime(float deltaTime)
+	{
+		time += deltaTime;
+	}
+
+	public String getTime()
+	{
+		int seconds = (int) time;
+		int minutes = seconds / 60;
+		seconds %= 60;
+		String result = "";
+		if(minutes > 0)
+			result += minutes + ":";
+		result += String.format("%02d", seconds);
+		return result;
 	}
 
 	private VectorF generateNewDotAtOffScreenRadius()
@@ -257,6 +273,7 @@ public class World
 		if(core.shieldEnergy > 0.0F)
 		{
 			iterator.remove();
+			game.getVibration().vibrate(30);
 		}
 		else
 		{
@@ -279,6 +296,7 @@ public class World
 				   	(dotAngle < core.angle + core.GAP_ANGLE)))
 		{
 			iterator.remove();
+			game.getVibration().vibrate(30);
 		}
 		}
 	}
@@ -299,7 +317,7 @@ public class World
 	{
 		if(dot.type == Dot.Type.Enemy)
 		{
-		core.health -= dot.energy / energyCoeff;
+		core.health -= dot.energy / ENERGY_FACTOR;
 		if(core.health < 0.0F)
 		{
 			state = GameState.GameOver;
@@ -308,7 +326,7 @@ public class World
 		}
 		else if (dot.type == Dot.Type.Health)
 		{
-		core.health += dot.energy / energyCoeff;
+		core.health += dot.energy / ENERGY_FACTOR;
 		if(core.health > 1.0F)	
 		{
 			core.health = 1.0F;
@@ -320,15 +338,8 @@ public class World
 			if(core.shieldEnergy > 1.0F)
 				core.shieldEnergy = 1.0F;
 		}
-		else if(dot.type == Dot.Type.Bomb)
-		{
-			explosion(dot.energy);
-		}
 		iterator.remove();
+		game.getVibration().vibrate(30);
 	}
 
-	private void explosion(float energy)
-	{
-		// Boom!
-	}
 }

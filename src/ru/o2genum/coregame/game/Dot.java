@@ -4,7 +4,7 @@ public class Dot
 {
 	public enum Type {Enemy, Health, 
 		Shield, // Protects the core 
-		Bomb} // Destroys all points within defined radius
+		}
 
 	public Type type;
 	public VectorF speed;

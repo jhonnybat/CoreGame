@@ -8,18 +8,26 @@ import java.util.*;
 
 import android.graphics.*;
 import android.util.Log;
+import android.content.res.*;
+import android.content.*;
+import android.app.*;
 
 import ru.o2genum.coregame.framework.*;
+import ru.o2genum.coregame.R;
 
 public class GameScreen extends Screen {
     long startTime = System.nanoTime();
 	World world;
 
 	Paint paint = new Paint();
+	Paint gradientPaint = new Paint();
 	RectF rect = new RectF();
+
+	Context r = null;
         
     public GameScreen(Game game) {
         super(game);
+		r = (Context) game;
 		world = new World(game);	
 		world.renew();
 		rect.top = world.core.coords.y - world.core.shieldRadius;
@@ -29,6 +37,14 @@ public class GameScreen extends Screen {
 
 		paint.setAntiAlias(true);
 		paint.setStrokeWidth(0.0F);
+
+		gradientPaint.setDither(true);
+		RadialGradient gradient = 
+			new RadialGradient((float) game.getGraphics().getWidth() / 2,
+					(float) game.getGraphics().getHeight()/2, 
+					world.offScreenRadius*2F, 0xff001319, 0xff013e3f, 
+					Shader.TileMode.CLAMP);
+		gradientPaint.setShader(gradient);
     }
     
     @Override
@@ -39,7 +55,7 @@ public class GameScreen extends Screen {
     @Override
     public void present(float deltaTime) {
     Canvas c = game.getGraphics().getCanvas();    
-	c.drawARGB(255, 0, 0, 0);
+	c.drawPaint(gradientPaint);
 	paint.setStyle(Paint.Style.FILL_AND_STROKE);
 	if(world.core.shieldEnergy > 0.0F)
 	{
@@ -72,21 +88,22 @@ public class GameScreen extends Screen {
 			color = 0xff19dbe2;
 		else if(dot.type == Dot.Type.Shield)
 			color = 0xff003cca;
-		else if(dot.type == Dot.Type.Bomb)
-			color = 0xffecff13;
 		paint.setColor(color);
 		c.drawCircle(dot.coords.x, dot.coords.y,
 				dot.maxRadius * dot.energy, paint);
     }
 
 	if(world.state == World.GameState.Running)
-		; // points, etc
+		drawMessage(world.getTime(), c);
 	else if(world.state == World.GameState.Ready)
-		drawMessage("Ready?\nTouch the screen!", c);
+		drawMessage(r.getString(R.string.ready), c);
 	else if(world.state == World.GameState.Paused)
-		drawMessage("Game is paused.\nTouch the screen\nto resume.", c);
+		drawMessage(r.getString(R.string.paused), c);
 	else if(world.state == World.GameState.GameOver)
-		drawMessage("Game over!\nTouch the screen\nto restart.", c);
+		drawMessage(r.getString(R.string.game_over)+
+				"\n"+
+				r.getString(R.string.your_time) +  " " + world.getTime() +
+				"\n\n" + r.getString(R.string.game_url), c);
 	}
 
 	private void drawMessage(String message, Canvas c)
