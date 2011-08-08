@@ -11,4 +11,4 @@ The rules are simple:
 
 This game is an Android version of [Hakim El Hattab's "Core"](http://www.chromeexperiments.com/detail/core/).
 
-The game is almost ready for release. However, I still need an awesome icon for it. Also, bomb bonus don't work, and there's no highscores and scores at all. Unfortunately, at this moment I have to suspend development. But I'll continue it within last days of august.
+Beta1 is released! The game is avaliable in [Android Market](https://market.android.com/details?id=ru.o2genum.coregame). I still need sounds for colliding dots.
