@@ -15,20 +15,20 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.47 r22583"
-   sodipodi:docname="рисунок.svg"
-   inkscape:export-filename="/home/oxygen/AndroidProjects/CoreGame/res/drawable-ldpi/icon.png"
-   inkscape:export-xdpi="3.75"
-   inkscape:export-ydpi="3.75">
+   sodipodi:docname="icon.svg"
+   inkscape:export-filename="/home/oxygen/AndroidProjects/CoreGame/materials/market-icon.png"
+   inkscape:export-xdpi="53.330002"
+   inkscape:export-ydpi="53.330002">
   <defs
      id="defs4">
     <linearGradient
        id="linearGradient3648">
       <stop
-         style="stop-color:#030616;stop-opacity:1;"
+         style="stop-color:#000000;stop-opacity:1;"
          offset="0"
          id="stop3650" />
       <stop
-         style="stop-color:#3c53d8;stop-opacity:1;"
+         style="stop-color:#6699ff;stop-opacity:1;"
          offset="1"
          id="stop3652" />
     </linearGradient>
@@ -43,13 +43,13 @@
        inkscape:collect="always"
        xlink:href="#linearGradient3648"
        id="radialGradient3656"
-       cx="229.7552"
-       cy="776.40131"
-       fx="229.7552"
-       fy="776.40131"
+       cx="186.65163"
+       cy="951.87445"
+       fx="186.65163"
+       fy="951.87445"
        r="384"
        gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(13.391006,-0.02246104,0.00309639,1.8460299,-3033.8222,-520.23591)" />
+       gradientTransform="matrix(6.428084,-0.01497402,0.00430026,1.8460275,-1716.4231,-521.65145)" />
     <filter
        inkscape:collect="always"
        id="filter3682">
@@ -89,11 +89,11 @@
     </linearGradient>
     <filter
        inkscape:collect="always"
-       id="filter3787">
+       id="filter3606">
       <feGaussianBlur
          inkscape:collect="always"
-         stdDeviation="6.8571844"
-         id="feGaussianBlur3789" />
+         stdDeviation="24.685864"
+         id="feGaussianBlur3608" />
     </filter>
   </defs>
   <sodipodi:namedview
@@ -104,8 +104,8 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.34782452"
-     inkscape:cx="967.43088"
-     inkscape:cy="476.74142"
+     inkscape:cx="638.37009"
+     inkscape:cy="411.80818"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -132,7 +132,7 @@
      id="layer1"
      transform="translate(0,-188.36218)">
     <rect
-       style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;filter:url(#filter3787)"
+       style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;filter:url(#filter3606)"
        id="rect3612-1"
        width="768"
        height="768"
@@ -141,9 +141,9 @@
        ry="84.795883"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90"
-       transform="matrix(1.009865,0,0,1.0028584,-281.99708,-5135.0576)" />
+       transform="matrix(0.97743366,0,0,0.9833996,-272.96878,-5014.7097)" />
     <rect
-       style="fill:url(#radialGradient3656);fill-opacity:1.0;fill-rule:evenodd;stroke:none;filter:url(#filter3682)"
+       style="fill:url(#radialGradient3656);fill-opacity:1;fill-rule:evenodd;stroke:none;filter:url(#filter3682)"
        id="rect3612"
        width="768"
        height="768"
@@ -169,7 +169,7 @@
        sodipodi:cy="438.49808"
        sodipodi:rx="110.688"
        sodipodi:ry="106.37548"
-       d="m 549.12749,438.49808 a 110.688,106.37548 0 1 1 -221.37601,0 110.688,106.37548 0 1 1 221.37601,0 z"
+       d="m 549.12749,438.49808 c 0,58.74955 -49.55671,106.37548 -110.68801,106.37548 -61.13129,0 -110.688,-47.62593 -110.688,-106.37548 0,-58.74956 49.55671,-106.37548 110.688,-106.37548 61.1313,0 110.68801,47.62592 110.68801,106.37548 z"
        transform="matrix(1.7389791,0,0,1.7824513,-417.43556,-68.490825)" />
     <path
        sodipodi:type="arc"
@@ -179,7 +179,7 @@
        sodipodi:cy="322.06006"
        sodipodi:rx="438.43948"
        sodipodi:ry="438.43948"
-       d="M 1358.1858,-80.908462 A 438.43948,438.43948 0 0 1 1865.2046,605.78417"
+       d="m 1358.1858,-80.908462 c 222.5534,-95.411968 480.3152,7.656499 575.7272,230.209872 65.54,152.87545 38.9289,329.67344 -68.7084,456.48276"
        transform="matrix(0.8375198,-0.08367398,0.07885438,0.81571861,-957.29738,570.34277)"
        sodipodi:start="4.3073759"
        sodipodi:end="6.9869895"
