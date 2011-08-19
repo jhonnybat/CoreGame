@@ -6,6 +6,7 @@ bin/
 *.dex
 *.apk
 *.ap_
+*.swp
 build.xml
 local.properties
 proguard.cfg

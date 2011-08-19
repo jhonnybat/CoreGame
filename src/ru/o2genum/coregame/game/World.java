@@ -4,6 +4,7 @@ import java.util.*;
 
 import ru.o2genum.coregame.framework.*;
 import ru.o2genum.coregame.framework.impl.*;
+import ru.o2genum.coregame.framework.Pool.PoolObjectFactory;
 import ru.o2genum.coregame.framework.Input.KeyEvent;
 
 import android.util.*;
@@ -12,10 +13,12 @@ public class World
 {
 	Random random = new Random();
 	Game game;
-	public List<Dot> dots = new LinkedList<Dot>();
+	private final int DOTS_COUNT = 10;
+	// In this case ArrayList is better than LinkedList:
+	// list should never be resized.
+	public List<Dot> dots = new ArrayList<Dot>(DOTS_COUNT);
 	public Core core = new Core();
 	public float offScreenRadius;
-	private final int DOTS_COUNT = 10;
 	private final float SHIELD_FACTOR = 20.0F;
 	private final float ENERGY_FACTOR = 6.0F;
 	private float deltaAngle = 0.0F;
@@ -27,6 +30,15 @@ public class World
 	public GameState state = GameState.Ready;
 
 	private float difficulty = 0.04F; // Max 0.1F
+
+	private Pool<Dot> dotPool = new Pool<Dot>(
+			new PoolObjectFactory()
+			{
+				public Dot createObject()
+				{
+					return new Dot();
+				}
+			}, DOTS_COUNT);
 
 	public World(Game game)
 	{
@@ -181,7 +193,7 @@ public class World
 	private void generateNewDot(boolean atStart)
 	{
 		float linearSpeed = 10.0F * difficulty;
-		Dot dot = new Dot();
+		Dot dot = dotPool.newObject();
 		if(atStart)
 		{
 			dot.coords = generateNewDotCoordsInRandomPlace();
@@ -272,6 +284,7 @@ public class World
 		// in some places. Don't know if it's needed.
 		if(core.shieldEnergy > 0.0F)
 		{
+			dotPool.free(dot);
 			iterator.remove();
 			game.getVibration().vibrate(30);
 		}
@@ -295,6 +308,7 @@ public class World
 		if(!((dotAngle > core.angle) &&
 				   	(dotAngle < core.angle + core.GAP_ANGLE)))
 		{
+			dotPool.free(dot);
 			iterator.remove();
 			game.getVibration().vibrate(30);
 		}
@@ -338,6 +352,7 @@ public class World
 			if(core.shieldEnergy > 1.0F)
 				core.shieldEnergy = 1.0F;
 		}
+		dotPool.free(dot);
 		iterator.remove();
 		game.getVibration().vibrate(30);
 	}
