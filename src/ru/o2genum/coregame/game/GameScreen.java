@@ -7,6 +7,7 @@ import java.io.OutputStreamWriter;
 import java.util.*;
 
 import android.graphics.*;
+import android.graphics.drawable.*;
 import android.util.Log;
 import android.content.res.*;
 import android.content.*;
@@ -20,10 +21,11 @@ public class GameScreen extends Screen {
 	World world;
 
 	Paint paint = new Paint();
-	Paint gradientPaint = new Paint();
 	RectF rect = new RectF();
 
-	Context r = null;
+	GradientDrawable gradient;
+
+	Context r;
         
     public GameScreen(Game game) {
         super(game);
@@ -37,14 +39,16 @@ public class GameScreen extends Screen {
 
 		paint.setAntiAlias(true);
 		paint.setStrokeWidth(0.0F);
-
-		gradientPaint.setDither(true);
-		RadialGradient gradient = 
-			new RadialGradient((float) game.getGraphics().getWidth() / 2,
-					(float) game.getGraphics().getHeight()/2, 
-					world.offScreenRadius*2F, 0xff001319, 0xff013e3f, 
-					Shader.TileMode.CLAMP);
-		gradientPaint.setShader(gradient);
+		
+		// This gradient looks quite smooth, but not perfect
+		gradient = new GradientDrawable(GradientDrawable.Orientation.TL_BR,
+				new int[]{0xff001319, 0xff013e3f});
+		gradient.setGradientType(GradientDrawable.RADIAL_GRADIENT);
+		gradient.setGradientRadius((int) world.offScreenRadius);
+		gradient.setDither(false);
+		gradient.setGradientCenter(0.5F, 0.5F);
+		gradient.setBounds(new Rect(0, 0, game.getGraphics().getWidth(),
+				   	game.getGraphics().getHeight()));
     }
     
     @Override
@@ -55,7 +59,7 @@ public class GameScreen extends Screen {
     @Override
     public void present(float deltaTime) {
     Canvas c = game.getGraphics().getCanvas();    
-	c.drawPaint(gradientPaint);
+	gradient.draw(c);
 	paint.setStyle(Paint.Style.FILL_AND_STROKE);
 	if(world.core.shieldEnergy > 0.0F)
 	{

@@ -6,8 +6,14 @@ import ru.o2genum.coregame.framework.*;
 import ru.o2genum.coregame.framework.impl.*;
 import ru.o2genum.coregame.framework.Pool.PoolObjectFactory;
 import ru.o2genum.coregame.framework.Input.KeyEvent;
+import ru.o2genum.coregame.framework.Input.TouchEvent;
 
 import android.util.*;
+
+/* I should have used pools for my objects not to make garbage
+ * collector angry. So it freezes the game sometimes, 
+ * so I avoided some object creations. However, it doesn't help.
+ */
 
 public class World
 {
@@ -31,15 +37,6 @@ public class World
 
 	private float difficulty = 0.04F; // Max 0.1F
 
-	private Pool<Dot> dotPool = new Pool<Dot>(
-			new PoolObjectFactory()
-			{
-				public Dot createObject()
-				{
-					return new Dot();
-				}
-			}, DOTS_COUNT);
-
 	public World(Game game)
 	{
 		this.game = game;
@@ -58,12 +55,13 @@ public class World
 		// Max dot radius (when it's energy is 1.0F)
 		Dot.maxRadius = core.maxRadius / 8.0F;
 	}
-		
+	// Restart the game	
 	public void renew()
 	{
 		dots.clear();
 		core.health = 1.0F;
 		core.shieldEnergy = 0.0F;
+		time = 0.0F;
 		state = GameState.Ready;
 		generateStartDots(DOTS_COUNT);
 	}
@@ -121,18 +119,25 @@ public class World
 
 	private void updateReady(float deltaTime)
 	{
-		if(game.getInput().isTouchDown() || checkMenuUp())
+		if(checkTouchUp() || checkMenuUp())
 			state = GameState.Running;
 	}
 	
+	private boolean checkTouchUp()
+	{
+		for(TouchEvent event : game.getInput().getTouchEvents())
+		{
+			if(event.type == TouchEvent.TOUCH_UP)
+				return true;
+		}
+		return false;
+	}
+
 	private boolean checkMenuUp()
 	{
-		List<KeyEvent> events = game.getInput().getKeyEvents();
-		Iterator<KeyEvent> i = events.iterator();
-		while(i.hasNext())
+		for(KeyEvent event : game.getInput().getKeyEvents())
 		{
-			KeyEvent e = i.next();
-			if((e.type == KeyEvent.KEY_UP) && (e.keyCode == 
+			if((event.type == KeyEvent.KEY_UP) && (event.keyCode == 
 						android.view.KeyEvent.KEYCODE_MENU))
 			{
 				return true;
@@ -143,13 +148,13 @@ public class World
 
 	private void updatePaused(float deltaTime)
 	{
-		if(game.getInput().isTouchDown() || checkMenuUp())
+		if(checkTouchUp() || checkMenuUp())
 			state = GameState.Running;
 	}
 
 	private void updateGameOver(float deltaTime)
 	{
-		if(game.getInput().isTouchDown() || checkMenuUp())
+		if(checkTouchUp() || checkMenuUp())
 			renew();
 	}
 
@@ -193,7 +198,7 @@ public class World
 	private void generateNewDot(boolean atStart)
 	{
 		float linearSpeed = 10.0F * difficulty;
-		Dot dot = dotPool.newObject();
+		Dot dot = new Dot();
 		if(atStart)
 		{
 			dot.coords = generateNewDotCoordsInRandomPlace();
@@ -206,7 +211,7 @@ public class World
 				linearSpeed * (-dot.coords.x / dot.coords.length()),
 			   linearSpeed * (-dot.coords.y / dot.coords.length()));
 		dot.speed = speed;
-		dot.coords = dot.coords.add(core.coords);
+		dot.coords.addToThis(core.coords);
 		dot.energy = random.nextFloat();
 		if(dot.energy <= 0.3F)
 			dot.energy = 0.3F;
@@ -249,11 +254,10 @@ public class World
 	}
 	private void moveDots(float deltaTime)
 	{
-		Iterator<Dot> iterator = dots.iterator();
-		while(iterator.hasNext())
+		for(Dot dot : dots)
 		{
-			Dot dot = iterator.next();
-			dot.coords = dot.coords.add(dot.speed.multiply(deltaTime * 100.0F));
+			dot.coords.addToThis(dot.speed.x * deltaTime * 100.0F,
+					dot.speed.y * deltaTime * 100.0F);
 		}
 	}
 
@@ -268,7 +272,9 @@ public class World
 
 	private void handleCollision(Dot dot, Iterator<Dot> iterator)
 	{
-		float lengthToCoreCenter = dot.coords.substract(core.coords).length(); 
+		float lengthToCoreCenter = (float)
+			Math.hypot((double)(dot.coords.x - core.coords.x),
+					(double)(dot.coords.y - core.coords.y)); 
 		if(Math.abs(lengthToCoreCenter - 
 					core.shieldRadius) <= dot.maxRadius * dot.energy +
 				Core.SHIELD_WIDTH)
@@ -284,16 +290,16 @@ public class World
 		// in some places. Don't know if it's needed.
 		if(core.shieldEnergy > 0.0F)
 		{
-			dotPool.free(dot);
 			iterator.remove();
 			game.getVibration().vibrate(30);
 		}
 		else
 		{
-		VectorF v = dot.coords.substract(core.coords);
 		// Pay attention at -v.y! Y-axis is inverted, 
 		// because it points downwards.
-		float dotAngle = (float) Math.atan2((double) - v.y, (double) v.x);
+		float dotAngle = (float) Math.atan2((double) - 
+				(dot.coords.y - core.coords.y),
+			   	(double) (dot.coords.x - core.coords.x));
 		dotAngle = dotAngle / (((float) Math.PI) * 2.0F) * 360.0F;
 		dotAngle = normAngle(dotAngle);
 		Log.d("LOL", "core.angle = " + core.angle + "; dotAngle = " + dotAngle);
@@ -308,7 +314,6 @@ public class World
 		if(!((dotAngle > core.angle) &&
 				   	(dotAngle < core.angle + core.GAP_ANGLE)))
 		{
-			dotPool.free(dot);
 			iterator.remove();
 			game.getVibration().vibrate(30);
 		}
@@ -352,7 +357,6 @@ public class World
 			if(core.shieldEnergy > 1.0F)
 				core.shieldEnergy = 1.0F;
 		}
-		dotPool.free(dot);
 		iterator.remove();
 		game.getVibration().vibrate(30);
 	}
