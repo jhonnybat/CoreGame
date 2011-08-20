@@ -49,6 +49,9 @@ public class GameScreen extends Screen {
 		gradient.setGradientCenter(0.5F, 0.5F);
 		gradient.setBounds(new Rect(0, 0, game.getGraphics().getWidth(),
 				   	game.getGraphics().getHeight()));
+		
+		paint.setTextSize(((float)game.getGraphics().getHeight()) / 16F);
+		paint.setTextAlign(Paint.Align.CENTER);
     }
     
     @Override
@@ -116,7 +119,7 @@ public class GameScreen extends Screen {
 		float y = paint.getTextSize();
 		for(String line: message.split("\n"))
 		{
-		c.drawText(line, 0, y, paint);
+		c.drawText(line, c.getWidth()/2F, y, paint);
 		y += paint.getTextSize();
 		}
 	}
