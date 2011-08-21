@@ -13,7 +13,7 @@ The game:
 
 The rules are simple:
 
-* protect the core (big cyan dot in the center of th screen) as long as possible
+* protect the core (big cyan dot in the center of the screen) as long as possible
 * gain health (cyan dots) and use shields (blue dots)
 
 This game is an Android version of [Hakim El Hattab's "Core"](http://www.chromeexperiments.com/detail/core/). It is available in [Android Market](https://market.android.com/details?id=ru.o2genum.coregame). If you want to install the game on your device, I recommend to search `pname:ru.o2genum.coregame` in the Market.
