@@ -26,6 +26,10 @@ What I need:
 ------------
 I need `.ogg` (preferred) or `.mp3` sounds for colliding dots. I may use one sound for all situations, two sounds (core collision / core shield collision) or three ones (health / shield / enemy dot collision). What about awesome background music ... I only dream of it.
 
+Also, I need translations. If you know languages, just download [strings.xml](/o2genum/CoreGame/raw/master/res/values/strings.xml), translate it into your language and [send it to me](http://www.google.com/recaptcha/mailhide/d?k=01YSknRhZKApKBTTbEktzc9w==&c=iSBdraKqz8T1XKSxx8QQ8Q==).
+
+And, of cource, feel free to fork this project, report bugs and issues.
+
 License:
 -------
 The game is licensed under [Open Source Initiative MIT License](http://www.opensource.org/licenses/mit-license.php).
