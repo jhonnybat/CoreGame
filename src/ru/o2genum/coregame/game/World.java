@@ -137,11 +137,12 @@ public class World
 	{
 		for(KeyEvent event : game.getInput().getKeyEvents())
 		{
-			if((event.type == KeyEvent.KEY_UP) && (event.keyCode == 
-						android.view.KeyEvent.KEYCODE_MENU))
+			if(event.keyCode == android.view.KeyEvent.KEYCODE_MENU)
 			{
-				return true;
+				if(event.type == KeyEvent.KEY_UP)
+					return true;
 			}
+
 		}
 		return false;
 	}
@@ -160,6 +161,11 @@ public class World
 
 	private void updateRunning(float deltaTime)
 	{
+		checkTouchUp(); // Just to clear touch event buffer
+
+		if(checkMenuUp())
+			state = GameState.Paused;
+
 		countTime(deltaTime);
 
 		doInput();
@@ -169,8 +175,6 @@ public class World
 		handleCollisions();
 		moveDots(deltaTime);
 		decreaseShieldEnergy(deltaTime);
-		if(checkMenuUp())
-			state = GameState.Paused;
 	}
 
 	private void decreaseShieldEnergy(float deltaTime)
@@ -192,7 +196,7 @@ public class World
 
 	private void increaseDifficulty()
 	{
-		difficulty += 0.0001F;
+		difficulty += 0.003F;
 	}
 
 	private void generateNewDot(boolean atStart)
