@@ -28,6 +28,13 @@ The code:
 --------
 Game framework (`ru.o2genum.coregame.framework` package) was initially taken from [Mario Zechner's "Beginning Android Games"](http://code.google.com/p/beginning-android-games/) book. I've modified a few sources and adapted them to my needs. The game itself is contained within the `ru.o2genum.coregame.game` package. Almost all game logic is in the `World.java`.
 
+Tools I used:
+-------------
+* Android SDK + JDK + ant
+* vim
+* Inkscape
+* [as3sfxr](http://www.superflashbros.net/as3sfxr/)
+
 What I need:
 ------------
 I need translations. If you know languages, just download [strings.xml](/o2genum/CoreGame/raw/master/res/values/strings.xml), translate it into your language and [send it to me](http://www.google.com/recaptcha/mailhide/d?k=01YSknRhZKApKBTTbEktzc9w==&c=iSBdraKqz8T1XKSxx8QQ8Q==).
