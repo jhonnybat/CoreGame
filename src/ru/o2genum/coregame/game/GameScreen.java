@@ -115,11 +115,22 @@ public class GameScreen extends Screen {
 
 	private void drawMessage(String message, Canvas c)
 	{
-		paint.setColor(0xffffffff);
 		float y = paint.getTextSize();
 		for(String line: message.split("\n"))
 		{
+		// Draw black stroke
+		paint.setStrokeWidth(2F);
+		paint.setColor(0xff000000);
+	    paint.setStyle(Paint.Style.STROKE);
+
 		c.drawText(line, c.getWidth()/2F, y, paint);
+		// Draw white text
+		paint.setStrokeWidth(0.0F);
+		paint.setColor(0xffffffff);
+	    paint.setStyle(Paint.Style.FILL);
+
+		c.drawText(line, c.getWidth()/2F, y, paint);
+
 		y += paint.getTextSize();
 		}
 	}
