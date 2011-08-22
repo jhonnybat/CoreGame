@@ -37,6 +37,16 @@ public class World
 
 	private float difficulty = 0.04F; // Max 0.1F
 
+	// Sounds
+	// Dot collides with core
+	Sound coreHurt;
+	Sound coreHealth;
+	Sound coreShield;
+	// Dot collides with shield
+	Sound shieldCollision;
+
+	Sound gameOver;
+
 	public World(Game game)
 	{
 		this.game = game;
@@ -54,7 +64,19 @@ public class World
 				(double) g.getHeight() / 2);
 		// Max dot radius (when it's energy is 1.0F)
 		Dot.maxRadius = core.maxRadius / 8.0F;
+		loadSounds();
 	}
+
+	private void loadSounds()
+	{
+		Audio a = game.getAudio();
+		coreHurt = a.newSound("core_hurt.wav");
+		coreHealth = a.newSound("core_health.wav");
+		coreShield = a.newSound("core_shield.wav");
+		shieldCollision = a.newSound("shield_collision.wav");
+		gameOver = a.newSound("game_over.wav");
+	}
+
 	// Restart the game	
 	public void renew()
 	{
@@ -63,6 +85,7 @@ public class World
 		core.shieldEnergy = 0.0F;
 		time = 0.0F;
 		state = GameState.Ready;
+		difficulty = 0.04F;
 		generateStartDots(DOTS_COUNT);
 	}
 	// Add randomness
@@ -196,7 +219,7 @@ public class World
 
 	private void increaseDifficulty()
 	{
-		difficulty += 0.003F;
+		difficulty += 0.01F;
 	}
 
 	private void generateNewDot(boolean atStart)
@@ -295,6 +318,7 @@ public class World
 		if(core.shieldEnergy > 0.0F)
 		{
 			iterator.remove();
+			shieldCollision.play(dot.energy);
 			game.getVibration().vibrate(30);
 		}
 		else
@@ -319,6 +343,7 @@ public class World
 				   	(dotAngle < core.angle + core.GAP_ANGLE)))
 		{
 			iterator.remove();
+			shieldCollision.play(dot.energy);
 			game.getVibration().vibrate(30);
 		}
 		}
@@ -344,8 +369,13 @@ public class World
 		if(core.health < 0.0F)
 		{
 			state = GameState.GameOver;
+			gameOver.play(1F);
+			game.getVibration().vibrate(10);
+			game.getVibration().vibrate(40);
+			game.getVibration().vibrate(100);
 			core.health = 0.0F;
 		}
+		coreHurt.play(dot.energy);
 		}
 		else if (dot.type == Dot.Type.Health)
 		{
@@ -354,12 +384,14 @@ public class World
 		{
 			core.health = 1.0F;
 		}
+		coreHealth.play(dot.energy);
 		}
 		else if(dot.type == Dot.Type.Shield)
 		{
 			core.shieldEnergy += dot.energy;
 			if(core.shieldEnergy > 1.0F)
 				core.shieldEnergy = 1.0F;
+			coreShield.play(dot.energy);
 		}
 		iterator.remove();
 		game.getVibration().vibrate(30);
