@@ -219,7 +219,7 @@ public class World
 
 	private void increaseDifficulty()
 	{
-		difficulty += 0.01F;
+		difficulty += 0.00005F;
 	}
 
 	private void generateNewDot(boolean atStart)
@@ -233,6 +233,7 @@ public class World
 		else
 		{
 			dot.coords = generateNewDotAtOffScreenRadius();
+			increaseDifficulty();
 		}
 		VectorF speed = new VectorF(
 				linearSpeed * (-dot.coords.x / dot.coords.length()),
