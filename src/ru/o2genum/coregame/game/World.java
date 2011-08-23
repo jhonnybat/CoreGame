@@ -27,7 +27,6 @@ public class World
 	public float offScreenRadius;
 	private final float SHIELD_FACTOR = 20.0F;
 	private final float ENERGY_FACTOR = 6.0F;
-	private float deltaAngle = 0.0F;
 
 	private float time = 0.0F; // in seconds
 
@@ -132,11 +131,10 @@ public class World
 				normAngle(((float) (Math.atan2(-(touchY - core.coords.y), 
 						touchX - core.coords.x) / (Math.PI * 2) *
 				360.0)) - Core.GAP_ANGLE/2F);
-			deltaAngle = core.angle - orientAngle;
 		}
 		else
 		{
-			core.angle = normAngle(orientAngle + deltaAngle);
+			core.angle = normAngle((orientAngle - Core.GAP_ANGLE/2F));
 		}
 	}
 
