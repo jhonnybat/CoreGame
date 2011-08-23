@@ -37,7 +37,11 @@ Tools I used:
 
 What I need:
 ------------
-I need translations. If you know languages, just download [strings.xml](/o2genum/CoreGame/raw/master/res/values/strings.xml), translate it into your language and [send it to me](http://www.google.com/recaptcha/mailhide/d?k=01YSknRhZKApKBTTbEktzc9w==&c=iSBdraKqz8T1XKSxx8QQ8Q==).
+* I need translations. If you know languages, just download [strings.xml](/o2genum/CoreGame/raw/master/res/values/strings.xml), translate it into your language and [send it to me](http://www.google.com/recaptcha/mailhide/d?k=01YSknRhZKApKBTTbEktzc9w==&c=iSBdraKqz8T1XKSxx8QQ8Q==).
+
+* Could you suggest some free awesome Unicode TrueType font? I think, default Android font is out of place.
+
+* I still think that quiet and unobtrusive background music would be good. If you have any idea, please, inform me. Oh... and, of cource, the music must be free!
 
 And, of cource, feel free to fork this project, report bugs and issues.
 
