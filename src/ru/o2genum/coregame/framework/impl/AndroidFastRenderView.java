@@ -18,6 +18,18 @@ public class AndroidFastRenderView extends SurfaceView implements Runnable
 		this.game = game;
 		this.frameBuffer = frameBuffer;
 		this.holder = getHolder();
+		/*
+		 * From email by Fivos Asimakop:
+		 *
+		 * Remove the wake lock. It's a buggy thing that can cause troubles on
+		 * devices like Motorola, ZTE and potentially others. Also it will allow
+		 * you to remove that permission. The best way to prevent device from
+		 * going to sleep while playing is setting a "keepscreenon" attribute to
+		 * ON with the "setKeepScreenOn(true)" method. You may be able to do 
+		 * this in the SurfaceView that holds the canvas ( Not 100% sure about
+		 * that, I haven't worked with a Canvas yet ).
+		 */
+		setKeepScreenOn(true);
 	}
 	
 	public void resume()

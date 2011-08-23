@@ -23,7 +23,6 @@ public abstract class AndroidGame extends Activity implements Game
 	FileIO fileIO;
 	Vibration vibration;
 	Screen screen;
-	WakeLock wakeLock;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -50,15 +49,12 @@ public abstract class AndroidGame extends Activity implements Game
 
 		PowerManager powerManager = 
 			(PowerManager) getSystemService(Context.POWER_SERVICE);
-		wakeLock = powerManager.newWakeLock(PowerManager.FULL_WAKE_LOCK,
-				"CoreGame");
 	}
 
 	@Override
 	public void onResume()
 	{
 		super.onResume();
-		wakeLock.acquire();
 		screen.resume();
 		renderView.resume();
 	}
@@ -67,7 +63,6 @@ public abstract class AndroidGame extends Activity implements Game
 	public void onPause()
 	{
 		super.onPause();
-		wakeLock.release();
 		renderView.pause();
 		screen.pause();
 
