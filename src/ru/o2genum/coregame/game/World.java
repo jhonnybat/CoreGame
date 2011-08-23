@@ -134,8 +134,27 @@ public class World
 		}
 		else
 		{
-			core.angle = normAngle((orientAngle - Core.GAP_ANGLE/2F));
+			core.angle = stabilizeAngle(orientAngle - Core.GAP_ANGLE/2F,
+					core.angle, 8F);
 		}
+	}
+
+	// Removes accelerometer noise and makes
+	// core shield rotate smooth when user touches / untouches
+	// the screen (and game switch accelerometer / touchscreen control).
+	// Stabilisation increases, as factor value becomes larger.
+	private float stabilizeAngle(float real, float current, float factor)
+	{
+		real = normAngle(real);
+		current = normAngle(current);
+		// Stabilisation should choose shortest way
+		// (is it better to rotate clockwise or counterclockwise?)
+		if(current - real > 180F)
+			real += 360;
+		if(real - current > 180F)
+			real -= 360;
+		// (current + current + current ... + real) / numberOfElements
+		return normAngle((current * factor + real) / (factor + 1F));
 	}
 
 	private void updateReady(float deltaTime)
