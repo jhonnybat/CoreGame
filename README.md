@@ -41,6 +41,10 @@ I need translations. If you know languages, just download [strings.xml](/o2genum
 
 And, of cource, feel free to fork this project, report bugs and issues.
 
+Special thanks to:
+------------------
+[Fivos Asimakop](http://fivasim.pcriot.com/) for Greek and German translations, advices about orientation sensor (see `AndroidOrientationHandler.java`) and wake lock (`AndroidFastRenderView.java`).
+
 License:
 -------
 The game is licensed under [Open Source Initiative MIT License](http://www.opensource.org/licenses/mit-license.php).
