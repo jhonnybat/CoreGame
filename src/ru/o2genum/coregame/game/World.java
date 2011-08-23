@@ -11,8 +11,8 @@ import ru.o2genum.coregame.framework.Input.TouchEvent;
 import android.util.*;
 
 /* I should have used pools for my objects not to make garbage
- * collector angry. So it freezes the game sometimes, 
- * so I avoided some object creations. However, it doesn't help.
+ * collector angry. As it freezes the game sometimes, 
+ * I avoided some object creations. However, it doesn't help.
  */
 
 public class World
@@ -21,7 +21,7 @@ public class World
 	Game game;
 	private final int DOTS_COUNT = 10;
 	// In this case ArrayList is better than LinkedList:
-	// list should never be resized.
+	// list will never be resized.
 	public List<Dot> dots = new ArrayList<Dot>(DOTS_COUNT);
 	public Core core = new Core();
 	public float offScreenRadius;
