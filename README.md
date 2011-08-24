@@ -41,7 +41,7 @@ What I need:
 
 * Could you suggest some free awesome Unicode TrueType font? I think, default Android font is out of place.
 
-* I still think that quiet and unobtrusive background music would be good. If you have any idea, please, inform me. Oh... and, of cource, the music must be free!
+* I still think that quiet and unobtrusive background music would be good. If you have any idea, please, inform me. Oh... and, of course, the music must be free!
 
 And, of cource, feel free to fork this project, report bugs and issues.
 
