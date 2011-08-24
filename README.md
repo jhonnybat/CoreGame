@@ -43,7 +43,7 @@ And, of cource, feel free to fork this project, report bugs and issues.
 
 Special thanks to:
 ------------------
-[Fivos Asimakop](http://fivasim.pcriot.com/) for Greek and German translations, advices about orientation sensor (see `AndroidOrientationHandler.java`) and wake lock (`AndroidFastRenderView.java`).
+* [Fivos Asimakop](http://fivasim.pcriot.com/) for Greek and German translations, advices about orientation sensor (see `AndroidOrientationHandler.java`) and wake lock (`AndroidFastRenderView.java`).
 
 License:
 -------
