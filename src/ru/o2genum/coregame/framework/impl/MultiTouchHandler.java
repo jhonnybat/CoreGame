@@ -49,7 +49,6 @@ public class MultiTouchHandler implements TouchHandler {
                 touchEvent.y = touchY[pointerId] = (int) event
                         .getY(pointerIndex);
                 isTouched[pointerId] = true;
-				Log.d("TOUCH", "Pointer " + pointerId + " is DOWN");
                 touchEventsBuffer.add(touchEvent);
                 break;
 
@@ -64,7 +63,6 @@ public class MultiTouchHandler implements TouchHandler {
                 touchEvent.y = touchY[pointerId] = (int) event
                         .getY(pointerIndex);
                 isTouched[pointerId] = false;
-				Log.d("TOUCH", "Pointer " + pointerId + " is UP");
                 touchEventsBuffer.add(touchEvent);
                 break;
 

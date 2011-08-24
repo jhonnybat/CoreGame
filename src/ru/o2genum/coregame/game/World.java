@@ -348,7 +348,6 @@ public class World
 			   	(double) (dot.coords.x - core.coords.x));
 		dotAngle = dotAngle / (((float) Math.PI) * 2.0F) * 360.0F;
 		dotAngle = normAngle(dotAngle);
-		Log.d("LOL", "core.angle = " + core.angle + "; dotAngle = " + dotAngle);
 		// For example, dotAngle = 3, and core.angle = 365
 		// We need to solve this somehow:
 		core.angle = normAngle(core.angle);
