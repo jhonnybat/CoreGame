@@ -24,6 +24,8 @@ https://market.android.com/details?id=ru.o2genum.coregame
 
 <img src="http://qrcode.kaywa.com/img.php?s=5&d=market%3A%2F%2Fdetails%3Fid%3Dru.o2genum.coregame" alt="qrcode"  />
 
+Or use <a href="https://github.com/o2genum/CoreGame/blob/master/CoreGame.apk">apk</a>, if you don't have Google Play account.
+
 The code:
 --------
 Game framework (`ru.o2genum.coregame.framework` package) was initially taken from [Mario Zechner's "Beginning Android Games"](http://code.google.com/p/beginning-android-games/) book. I've modified a few sources and adapted them to my needs. The game itself is contained within the `ru.o2genum.coregame.game` package. Almost all game logic is in the `World.java`.
