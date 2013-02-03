@@ -4,9 +4,9 @@
 Screenshots:
 ------------
 
-<img src="/o2genum/CoreGame/raw/master/etc/screenshot-for-readme1.png" width="32.5%"> &nbsp;
-<img src="/o2genum/CoreGame/raw/master/etc/screenshot-for-readme2.png" width="32.5%"> &nbsp;
-<img src="/o2genum/CoreGame/raw/master/etc/screenshot-for-readme3.png" width="32.5%"> 
+<img src="https://raw.github.com/o2genum/CoreGame/master/etc/screenshot-for-readme1.png" width="32.5%"> &nbsp;
+<img src="https://raw.github.com/o2genum/CoreGame/master/etc/screenshot-for-readme2.png" width="32.5%"> &nbsp;
+<img src="https://raw.github.com/o2genum/CoreGame/master/etc/screenshot-for-readme3.png" width="32.5%"> 
 
 The game:
 ---------
