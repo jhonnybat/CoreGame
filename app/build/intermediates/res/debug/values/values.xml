@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/home/jonathan/Development/contribute/CoreGame/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
+    <string name="app_name">Core</string>
+    <string name="game_over">Game over!\nTouch the screen\nto restart.</string>
+    <string name="game_url">bit.ly/coregame</string>
+    <string name="paused">Game is paused.\nTouch the screen\nto resume.</string>
+    <string name="ready">Ready?\nTouch the screen!</string>
+    <string name="your_time">Your time:</string>
+</resources>
